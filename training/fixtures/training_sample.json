@@ -1,0 +1,242 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$sample$hashedpassword=",
+      "last_login": null,
+      "is_superuser": false,
+      "username": "demo",
+      "first_name": "Demo",
+      "last_name": "User",
+      "email": "demo@ironos.app",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2026-01-01T00:00:00Z",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "accounts.userprofile",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "units": "metric",
+      "date_of_birth": "1990-05-15",
+      "height_cm": "178.0",
+      "sex": "male",
+      "experience_level": "intermediate",
+      "primary_goal": "lean_bulk",
+      "equipment_access": "full_gym",
+      "activity_level": "moderately_active",
+      "weekly_training_days": 4,
+      "resting_heart_rate": 58,
+      "max_heart_rate": 185,
+      "llm_provider": "anthropic",
+      "llm_provider_locked": false,
+      "monthly_token_budget": null,
+      "onboarding_complete": true,
+      "created_at": "2026-01-01T00:00:00Z",
+      "updated_at": "2026-01-01T00:00:00Z"
+    }
+  },
+  {
+    "model": "training.exercise",
+    "pk": 1,
+    "fields": {
+      "name": "Barbell Back Squat",
+      "wger_id": 111,
+      "primary_muscle": "quadriceps",
+      "secondary_muscles": ["glutes", "hamstrings", "core"],
+      "category": "compound",
+      "equipment": "barbell",
+      "is_custom": false,
+      "created_by": null
+    }
+  },
+  {
+    "model": "training.program",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "name": "4-Day Upper/Lower Hypertrophy",
+      "goal": "lean_bulk",
+      "start_date": "2026-06-30",
+      "length_weeks": 8,
+      "status": "active",
+      "generation_task_id": null,
+      "meta": {"generated_by": "claude", "template": "upper_lower"},
+      "created_at": "2026-06-26T08:00:00Z"
+    }
+  },
+  {
+    "model": "training.programday",
+    "pk": 1,
+    "fields": {
+      "program": 1,
+      "week_number": 1,
+      "day_number": 1,
+      "name": "Lower A",
+      "is_rest": false,
+      "focus": "quad-dominant"
+    }
+  },
+  {
+    "model": "training.programexercise",
+    "pk": 1,
+    "fields": {
+      "program_day": 1,
+      "exercise": 1,
+      "order": 1,
+      "target_sets": 4,
+      "target_reps_low": 6,
+      "target_reps_high": 8,
+      "target_rpe": "8.0",
+      "target_weight": null,
+      "notes": "Focus on depth and bracing"
+    }
+  },
+  {
+    "model": "training.session",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date": "2026-06-26",
+      "program_day": 1,
+      "duration_minutes": 65,
+      "notes": "Felt strong today",
+      "source": "manual",
+      "created_at": "2026-06-26T09:00:00Z"
+    }
+  },
+  {
+    "model": "training.sessionset",
+    "pk": 1,
+    "fields": {
+      "session": 1,
+      "exercise": 1,
+      "set_index": 1,
+      "weight": "100.00",
+      "reps": 7,
+      "rpe": "8.0",
+      "set_type": "working",
+      "is_estimated": false
+    }
+  },
+  {
+    "model": "training.bodyweightentry",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date": "2026-06-26",
+      "weight": "82.50"
+    }
+  },
+  {
+    "model": "training.bodycompositionentry",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date": "2026-06-01",
+      "weight_kg": "82.00",
+      "body_fat_pct": "15.50",
+      "lean_mass": "69.29",
+      "measurements": {
+        "waist_cm": 82.0,
+        "chest_cm": 101.0,
+        "left_arm_cm": 36.5,
+        "right_arm_cm": 36.8
+      }
+    }
+  },
+  {
+    "model": "training.heartrateentry",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date": "2026-06-26",
+      "resting_hr": 57,
+      "hrv": "62.40",
+      "max_hr": null,
+      "source": "manual"
+    }
+  },
+  {
+    "model": "training.cardiosession",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date": "2026-06-25",
+      "modality": "steady",
+      "activity": "outdoor run",
+      "duration_minutes": 35,
+      "distance_km": "6.200",
+      "avg_heart_rate": 148,
+      "max_heart_rate": 167,
+      "avg_pace": "5.65",
+      "pace_unit": "min_per_km",
+      "splits": [
+        {"km": 1, "pace": "5.80"},
+        {"km": 2, "pace": "5.60"},
+        {"km": 3, "pace": "5.50"}
+      ],
+      "zone_minutes": {"z1": 2, "z2": 8, "z3": 18, "z4": 7, "z5": 0},
+      "zone_bounds": {"z1_max": 104, "z2_max": 130, "z3_max": 148, "z4_max": 167, "z5_max": 185},
+      "perceived_exertion": 6,
+      "notes": "Morning run, felt good in zone 3"
+    }
+  },
+  {
+    "model": "training.nutritiontarget",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "date_effective": "2026-06-26",
+      "tdee": "2850.00",
+      "calorie_target": "3100.00",
+      "protein_g": "185.00",
+      "carbs_g": "350.00",
+      "fat_g": "80.00",
+      "rationale": "Lean bulk surplus of 250 kcal targeting 0.3 kg/week gain"
+    }
+  },
+  {
+    "model": "training.weeklyreport",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "week_start": "2026-06-16",
+      "summary_markdown": "## Week of June 16\n\n- Completed 4/4 planned sessions\n- Average bodyweight: 82.3 kg\n- Total volume: 24,500 kg\n",
+      "metrics": {
+        "sessions_completed": 4,
+        "sessions_planned": 4,
+        "avg_bodyweight_kg": 82.3,
+        "total_volume_kg": 24500
+      },
+      "generation_task_id": null,
+      "created_at": "2026-06-23T06:00:00Z"
+    }
+  },
+  {
+    "model": "training.goal",
+    "pk": 1,
+    "fields": {
+      "user": 1,
+      "goal_type": "strength",
+      "title": "Squat 120 kg for 5 reps",
+      "exercise": 1,
+      "target_mode": "weight_for_reps",
+      "target_value": "120.00",
+      "target_reps": 5,
+      "target_weight": "120.00",
+      "target_bodyfat": null,
+      "baseline_value": "100.00",
+      "target_date": "2026-10-01",
+      "status": "active",
+      "status_changed_at": null,
+      "superseded_by": null,
+      "created_at": "2026-06-26T08:00:00Z"
+    }
+  }
+]
