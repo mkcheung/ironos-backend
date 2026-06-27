@@ -11,3 +11,4 @@ dj-database-url>=2.3
 pgvector>=0.3
 pytest>=8.0
 pytest-django>=4.9
+google-auth>=2.29
