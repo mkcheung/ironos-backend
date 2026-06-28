@@ -29,6 +29,7 @@ class ProgramAdmin(admin.ModelAdmin):
     list_display = ('name', 'user', 'goal', 'status', 'length_weeks', 'start_date', 'created_at')
     list_filter = ('status',)
     search_fields = ('name', 'user__username', 'goal')
+    date_hierarchy = 'start_date'
 
 
 @admin.register(ProgramDay)
@@ -53,6 +54,7 @@ class SessionAdmin(admin.ModelAdmin):
     list_display = ('user', 'date', 'program_day', 'duration_minutes', 'source', 'created_at')
     list_filter = ('source',)
     search_fields = ('user__username', 'notes')
+    date_hierarchy = 'date'
 
 
 @admin.register(SessionSet)
@@ -65,15 +67,15 @@ class SessionSetAdmin(admin.ModelAdmin):
 @admin.register(BodyweightEntry)
 class BodyweightEntryAdmin(admin.ModelAdmin):
     list_display = ('user', 'date', 'weight')
-    list_filter = ()
     search_fields = ('user__username',)
+    date_hierarchy = 'date'
 
 
 @admin.register(BodyCompositionEntry)
 class BodyCompositionEntryAdmin(admin.ModelAdmin):
     list_display = ('user', 'date', 'weight_kg', 'body_fat_pct', 'lean_mass')
-    list_filter = ()
     search_fields = ('user__username',)
+    date_hierarchy = 'date'
 
 
 @admin.register(HeartRateEntry)
@@ -81,6 +83,7 @@ class HeartRateEntryAdmin(admin.ModelAdmin):
     list_display = ('user', 'date', 'resting_hr', 'hrv', 'max_hr', 'source')
     list_filter = ('source',)
     search_fields = ('user__username',)
+    date_hierarchy = 'date'
 
 
 @admin.register(CardioSession)
@@ -91,20 +94,21 @@ class CardioSessionAdmin(admin.ModelAdmin):
     )
     list_filter = ('modality',)
     search_fields = ('user__username', 'activity')
+    date_hierarchy = 'date'
 
 
 @admin.register(NutritionTarget)
 class NutritionTargetAdmin(admin.ModelAdmin):
     list_display = ('user', 'date_effective', 'tdee', 'calorie_target', 'protein_g', 'carbs_g', 'fat_g')
-    list_filter = ()
     search_fields = ('user__username',)
+    date_hierarchy = 'date_effective'
 
 
 @admin.register(WeeklyReport)
 class WeeklyReportAdmin(admin.ModelAdmin):
     list_display = ('user', 'week_start', 'generation_task_id', 'created_at')
-    list_filter = ()
     search_fields = ('user__username',)
+    date_hierarchy = 'week_start'
 
 
 @admin.register(Goal)
@@ -112,3 +116,5 @@ class GoalAdmin(admin.ModelAdmin):
     list_display = ('user', 'title', 'goal_type', 'status', 'target_date', 'created_at')
     list_filter = ('goal_type', 'status')
     search_fields = ('user__username', 'title')
+    # Goal is an append-only state machine; transitions happen in code, not via the admin form
+    readonly_fields = ('created_at', 'status_changed_at', 'superseded_by')

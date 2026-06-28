@@ -97,7 +97,7 @@ class Session(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sessions')
-    date = models.DateField()
+    date = models.DateField(db_index=True)
     program_day = models.ForeignKey(
         ProgramDay,
         null=True,
@@ -144,7 +144,7 @@ class SessionSet(models.Model):
 
 class BodyweightEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='bodyweight_entries')
-    date = models.DateField()
+    date = models.DateField(db_index=True)
     weight = models.DecimalField(max_digits=6, decimal_places=2)
 
     class Meta:
@@ -157,7 +157,7 @@ class BodyweightEntry(models.Model):
 
 class BodyCompositionEntry(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='body_composition_entries')
-    date = models.DateField()
+    date = models.DateField(db_index=True)
     weight_kg = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     body_fat_pct = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
     lean_mass = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
@@ -178,7 +178,7 @@ class HeartRateEntry(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='heart_rate_entries')
-    date = models.DateField()
+    date = models.DateField(db_index=True)
     resting_hr = models.PositiveSmallIntegerField(null=True, blank=True)
     hrv = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
     max_hr = models.PositiveSmallIntegerField(null=True, blank=True)
@@ -204,7 +204,7 @@ class CardioSession(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='cardio_sessions')
-    date = models.DateField()
+    date = models.DateField(db_index=True)
     modality = models.CharField(max_length=20, choices=MODALITY_CHOICES)
     activity = models.CharField(max_length=100)
     duration_minutes = models.PositiveSmallIntegerField()
@@ -228,7 +228,7 @@ class CardioSession(models.Model):
 
 class NutritionTarget(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='nutrition_targets')
-    date_effective = models.DateField()
+    date_effective = models.DateField(db_index=True)
     tdee = models.DecimalField(max_digits=7, decimal_places=2)
     calorie_target = models.DecimalField(max_digits=7, decimal_places=2)
     protein_g = models.DecimalField(max_digits=6, decimal_places=2)
@@ -245,7 +245,7 @@ class NutritionTarget(models.Model):
 
 class WeeklyReport(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='weekly_reports')
-    week_start = models.DateField()
+    week_start = models.DateField(db_index=True)
     summary_markdown = models.TextField(blank=True)
     metrics = models.JSONField(default=dict)
     generation_task_id = models.CharField(max_length=255, null=True, blank=True)
@@ -293,7 +293,7 @@ class Goal(models.Model):
     target_reps = models.PositiveSmallIntegerField(null=True, blank=True)
     target_weight = models.DecimalField(max_digits=7, decimal_places=2, null=True, blank=True)
     target_bodyfat = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)
-    baseline_value = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)
+    baseline_value = models.DecimalField(max_digits=8, decimal_places=2)
     target_date = models.DateField(null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='active')
     status_changed_at = models.DateTimeField(null=True, blank=True)
