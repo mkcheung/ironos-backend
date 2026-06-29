@@ -84,5 +84,15 @@ services:
       backend:
         condition: service_started
 
+  mcp-wger:
+    build:
+      context: ../ironos-mcp-servers
+    env_file:
+      - ../ironos-mcp-servers/.env.example
+    environment:
+      WGER_API_BASE: "https://wger.de/api/v2"
+    ports:
+      - "8001:8001"
+
 volumes:
   postgres_data:
